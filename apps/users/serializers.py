@@ -60,6 +60,7 @@ class UserLoginSerializer(serializers.Serializer):
             
             attrs['user'] = user
             return attrs
+        return None
 
 
 class UserSerializer(serializers.ModelSerializer):
