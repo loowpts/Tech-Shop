@@ -26,7 +26,12 @@ class IsAdminUser(BasePermission):
 
 class IsAdminOrReadOnly(BasePermission):
     """Админ может редактировать, остальные только читать"""
-    
+
+    def has_permission(self, request, view):
+        if request.method in SAFE_METHODS:
+            return True
+        return request.user and request.user.is_staff
+
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             return True
@@ -52,6 +57,12 @@ class IsVerifiedUser(BasePermission):
 
 class IsAuthenticatedOrReadOnly(BasePermission):
     """Авторизованные могут писать, анонимы только читать"""
+
+    def has_permission(self, request, view):
+        if request.method in SAFE_METHODS:
+            return True
+        return request.user and request.user.is_authenticated
+
     def has_object_permission(self, request, view, obj):
         if request.method in SAFE_METHODS:
             return True
