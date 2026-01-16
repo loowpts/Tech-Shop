@@ -3,8 +3,11 @@ from django.urls import path, include
 from django.conf import settings
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
-    path('api/users/', include('apps.users.urls')),
+    path('api/users/', include('apps.users.urls', namespace='users')),
+    path('api/products/', include('apps.products.urls', namespace='products')),
+    
 ]
 
 if settings.DEBUG:
