@@ -1,9 +1,6 @@
 import logging
 from django.db import transaction
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
-from typing import Dict, Any, Optional
 from django.db.models import F, Avg
 
 from apps.users.models import User

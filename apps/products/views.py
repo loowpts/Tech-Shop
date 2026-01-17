@@ -1,4 +1,4 @@
-from rest_framework import viewsets, filters, status, permissions
+from rest_framework import viewsets, filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
@@ -10,7 +10,7 @@ from apps.core.permissions import (
 )
 from .models import (
     Category, Brand, Product,
-    Review, ProductImage, ProductSpecification
+    Review
 )
 from .serializers import (
     CategoryListSerializer,
@@ -20,8 +20,6 @@ from .serializers import (
     ProductListSerializerList,
     ProductDetailSerializer,
     ProductCreateUpdateSerializer,
-    ProductImageSerializer,
-    ProductSpecificationSerializer,
     ReviewListSerializer,
     ReviewCreateSerializer
 )
