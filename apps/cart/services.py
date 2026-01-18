@@ -8,7 +8,7 @@ from django.db.models import F, Avg
 
 from apps.users.models import User
 from apps.products.models import Product
-# from apps.orders.models import Order, OrderItem
+from apps.orders.models import Order, OrderItem
 from .models import (
     Cart, CartItem
 )
