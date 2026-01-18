@@ -46,12 +46,19 @@ class BrandCreateSerializer(serializers.ModelSerializer):
         ]
 
 class ProductImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = ProductImage
         fields = [
             'id', 'image', 'is_main',
             'order', 'alt_text'
-        ] 
+        ]
+
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image.url
+        return None 
 
 
 class ProductSpecificationSerializer(serializers.ModelSerializer):
@@ -82,7 +89,9 @@ class ProductListSerializerList(serializers.ModelSerializer):
         
     def get_main_image(self, obj):
         img = obj.product_images.filter(is_main=True).first()
-        return img.image.url if img else None
+        if img and img.image:
+            return img.image.url
+        return None
 
         
 
