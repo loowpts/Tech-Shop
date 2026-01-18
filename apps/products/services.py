@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import F, Avg
 
 from apps.users.models import User
-# from apps.orders.models import Order, OrderItem
+from apps.orders.models import Order, OrderItem
 from .models import (
     Product, Review, Category,
     Brand, ProductImage, ProductSpecification
@@ -97,14 +97,12 @@ class ReviewService:
     
     @staticmethod
     def check_verified_purchase(user: User, product: Product):
-        pass
-    
-        # """Проверка: покупал ли пользователь товар"""
-        # return OrderItem.objects.filter(
-        #     order__user=user,
-        #     order__status='delivered',
-        #     product=product
-        # ).exists()
+        """Проверка: покупал ли пользователь товар"""
+        return OrderItem.objects.filter(
+            order__user=user,
+            order__status='delivered',
+            product=product
+        ).exists()
     
     @staticmethod
     def create_review(user: User, product: Product, rating: int, comment: str=''):
