@@ -1,6 +1,31 @@
 import re
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
+def validate_phone_number(value):
+    """
+    Валидатор для номера телефона.
+
+    Проверяет формат: +[код страны][номер] (10-15 цифр после +).
+
+    Args:
+        value: Номер телефона для валидации.
+
+    Returns:
+        str: Валидный номер телефона.
+
+    Raises:
+        ValidationError: Если формат номера некорректен.
+    """
+    if not value:
+        return value
+
+    pattern = r'^\+\d{10,15}$'
+    if not re.match(pattern, value):
+        raise ValidationError(
+            _('Введите корректный номер телефона в формате +1234567890 (от 10 до 15 цифр)')
+        )
+    return value
 
 def validate_positive_decimal(value):
     """Проверка что decimal > 0"""
